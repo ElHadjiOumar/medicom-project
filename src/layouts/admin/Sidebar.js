@@ -19,6 +19,18 @@ const Sidebar = () => {
             </div>
             Profile
           </Link>
+          <Link className="nav-link" to="/admin/add-pharmacie">
+            <div className="sb-nav-link-icon">
+              <i className="fas fa-tachometer-alt"></i>
+            </div>
+            Ajouter Pharmacie
+          </Link>
+          <Link className="nav-link" to="/admin/view-pharmacie">
+            <div className="sb-nav-link-icon">
+              <i className="fas fa-tachometer-alt"></i>
+            </div>
+            Liste des Pharmacies
+          </Link>
           <div className="sb-sidenav-menu-heading">Interface</div>
           <Link
             className="nav-link collapsed"

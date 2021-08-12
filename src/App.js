@@ -5,7 +5,7 @@ import {
   Route,
   Switch,
 } from "react-router-dom";
-import MasterLayout from "./layouts/admin/MasterLayout";
+//import MasterLayout from "./layouts/admin/MasterLayout";
 import Home from "./components/frontend/Home";
 import Login from "./components/frontend/auth/Login";
 import Register from "./components/frontend/auth/Register";
@@ -32,7 +32,7 @@ function App() {
           <Route path="/register" component={Register} /> */}
           <Route path="/login">
             {localStorage.getItem("auth_token") ? (
-              <Redirect to="/admin" />
+              <Redirect to="/" />
             ) : (
               <Login />
             )}

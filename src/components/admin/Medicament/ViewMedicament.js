@@ -3,25 +3,25 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import swal from "sweetalert";
 
-const ViewPharmacie = () => {
+const ViewMedicament = () => {
   const [loading, setLoading] = useState(true);
-  const [pharmacielist, setPharmacielist] = useState([]);
+  const [medicamentlist, setMedicamentlist] = useState([]);
   useEffect(() => {
-    axios.get(`/api/view-pharmacie`).then((res) => {
+    axios.get(`/api/view-medicament`).then((res) => {
       if (res.status === 200) {
-        setPharmacielist(res.data.pharmacie);
+        setMedicamentlist(res.data.medicament);
       }
       setLoading(false);
     });
   }, []);
 
-  const deletePharmacie = (e, id) => {
+  const deleteMedicament = (e, id) => {
     e.preventDefault();
 
     const thisClicked = e.currentTarget;
     thisClicked.innerText = "Suppression";
 
-    axios.delete(`/api/delete-pharmacie/${id}`).then((res) => {
+    axios.delete(`/api/delete-medicament/${id}`).then((res) => {
       if (res.data.status === 200) {
         swal("Success", res.data.message, "success");
         thisClicked.closest("tr").remove();
@@ -32,7 +32,7 @@ const ViewPharmacie = () => {
     });
   };
 
-  var viewpharmacie_HTMLTABLE = "";
+  var viewmedicament_HTMLTABLE = "";
 
   if (loading) {
     return (
@@ -48,16 +48,17 @@ const ViewPharmacie = () => {
       </div>
     );
   } else {
-    viewpharmacie_HTMLTABLE = pharmacielist.map((item) => {
+    viewmedicament_HTMLTABLE = medicamentlist.map((item) => {
       return (
         <tr>
           <td>{item.id}</td>
-          <td>{item.pharmacie_nom}</td>
-          <td>{item.pharmacie_adresse}</td>
-          <td>{item.pharmacie_numero}</td>
+          <td>{item.medicament_nom}</td>
+          <td>{item.medicament_categorie}</td>
+          <td>{item.medicament_reference}</td>
+          <td>{item.medicament_prix}</td>
           <td>
             <Link
-              to={`/admin/edit-pharmacie/${item.id}`}
+              to={`/admin/edit-medicament/${item.id}`}
               className="btn btn-success btn-sm"
             >
               Edit
@@ -67,7 +68,7 @@ const ViewPharmacie = () => {
             <button
               type="button"
               className="btn btn-danger btn-primary"
-              onClick={(e) => deletePharmacie(e, item.id)}
+              onClick={(e) => deleteMedicament(e, item.id)}
             >
               Delete
             </button>
@@ -82,12 +83,12 @@ const ViewPharmacie = () => {
       <div className="card mt-4">
         <div className="card-header">
           <h4>
-            Liste des Pharmacies
+            Liste des Medicaments
             <Link
-              to="/admin/add-pharmacie"
+              to="/admin/add-medicament"
               className="btn btn-primary btn-sm float-end"
             >
-              Ajoutez une pharmacie
+              Ajoutez une medicament
             </Link>
           </h4>
         </div>
@@ -96,14 +97,15 @@ const ViewPharmacie = () => {
             <thead>
               <tr>
                 <th>ID</th>
-                <th>Pharmacie Nom</th>
-                <th>Pharmacie Adresse</th>
-                <th>Pharmacie Numero</th>
+                <th>Medicament Nom</th>
+                <th>Medicament Categorie</th>
+                <th>Medicament Reference</th>
+                <th>Medicament Prix</th>
                 <th>EDIT</th>
                 <th>DELETE</th>
               </tr>
             </thead>
-            <tbody>{viewpharmacie_HTMLTABLE}</tbody>
+            <tbody>{viewmedicament_HTMLTABLE}</tbody>
           </table>
         </div>
       </div>
@@ -111,4 +113,4 @@ const ViewPharmacie = () => {
   );
 };
 
-export default ViewPharmacie;
+export default ViewMedicament;

@@ -36,7 +36,7 @@ function AdminPrivateRoute({ ...rest }) {
   );
 
   if (loading) {
-    return <h1>Loading...</h1>;
+    return <div class="loader">Loading...</div>;
   }
   return (
     <Route
